@@ -1,0 +1,23 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions: write-all
+
+
+jobs:
+        
+  new_pr:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - run: gh pr create --title "t" --body "content" --repo alafumee/restrepo --head main --base main 
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
