@@ -20,4 +20,4 @@ jobs:
     steps:
       - run: gh pr create --title "t" --body "content" --repo alafumee/testrepo --head main --base main 
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.pr }}
