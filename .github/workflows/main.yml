@@ -21,4 +21,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: git checkout new_test && gh pr create --title "t" --body "content" --repo alafumee/testrepo
         env:
-          GH_TOKEN: ${{ secrets.pr }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
