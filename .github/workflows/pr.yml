@@ -1,0 +1,17 @@
+name: create pr from fork
+
+on:
+  repository_dispatch:
+    types: [create_pr]
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+          repo: hjenryin/testrepo
+      - name: Create pr
+        - run: git checkout new_test; gh pr create --title "t" --body "content" --repo alafumee/testrepo
+          env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
