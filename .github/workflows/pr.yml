@@ -10,9 +10,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          ref: hjenryin/testrepo:new_test
+      - name: Add downstream
+        run: git remote add hj https://github.com/hjenryin/testrepo.git
+      - name: Fetch
+        run: git fetch hj
       - name: Create pr
-        - run: gh pr create --title "t" --body "content" --repo alafumee/testrepo
+        - run: git checkout hj/new_test; gh pr create --title "t" --body "content" --repo alafumee/testrepo
           env:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
