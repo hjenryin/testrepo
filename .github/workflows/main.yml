@@ -4,6 +4,8 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
+    branches:
+      - new_test
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,7 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
-      - run: git checkout new_test && gh pr create --title "t" --body "content" --repo alafumee/testrepo
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: actions/checkout@v4
+      # - run: git checkout new_test && gh pr create --title "t" --body "content" --repo alafumee/testrepo
+      #   env:
+      #     GH_TOKEN: ${{ secrets.pr }}
+      - name: Webhook
+        uses: joelwmale/webhook-action@master
+        with:
+          url: "https://api.github.com/repos/alafumee/testrepo/dispatches"
+          body: '{"event-type": "create-pr"}'
